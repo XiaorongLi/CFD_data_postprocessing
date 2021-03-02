@@ -1,5 +1,5 @@
 # CFD_data_processing
-Processing of CFD data obtained on tens of millions computational cells 
+Processing of CFD data obtained on tens of millions of computational cells 
 
 ## Background
 
@@ -7,9 +7,9 @@ As a fundamental part of my PhD project, I built a huge Computational Fluid Dyna
 
 <img src="/CFDbundle.png" height="400"  width="400" >
 
-The CFD model is huge, since it discretizes the flow channel into tens of millions cells. Actually, the picture above can also show the CFD-discretized representation of the flow bundle. Because the cells are very small, especially in the region near the solid surfaces of the channel, the CFD nodalization conforms very well to the real geometry of the channel. Since the cells are too small, I prefer to not display them on the geometry in the picture, but you can imagine the whole geometry is piled up by these small cells. A CFD software solves for the fluid field parameters (e.g. temperature, velocity, etc) on each of the small cells. These data are exported as csv files, which also contain the 3-dimensional coordinate information.
+The CFD model is huge, since it discretizes the flow channel into tens of millions of cells. Actually, the picture above can also show the CFD-discretized representation of the flow bundle. Because the cells are very small, especially in the region near the solid surfaces of the channel, the CFD nodalization conforms very well to the real geometry of the channel. Since the cells are too small, I prefer not to display them on the geometry in the picture, but you can imagine the whole geometry is piled up by these small cells. A CFD software solves for the fluid field parameters (e.g. temperature, velocity, etc) on each of the small cells. These data are exported as csv files, which also contain the 3-dimensional coordinate information.
 
-Processing of such huge CFD data is necessary, because in the subsequent work the CFD data has to be compared to a much more simplified model with much fewer nodes/cells. Therefore the huge amount of data on tens of millions computational cells must be summarized according to the coarse nodalization in the simplified model, as shown below. In this case, the nodes/cells in the nodalization are represented by the cuboids that are clearly visible.
+Processing of such huge CFD data is necessary, because in the subsequent work the CFD data has to be compared to a much more simplified model with much fewer nodes/cells. Therefore the huge amount of data on tens of millions of computational cells must be summarized according to the coarse nodalization in the simplified model, as shown below. In this case, the nodes/cells in the nodalization are represented by the cuboids that are clearly visible.
 
 <img src="/CTFbundle.png" height="400" >
 
@@ -33,4 +33,4 @@ Various Python functions have to be created for the aforementioned purpose of da
 
 - gapPartitioning(combinedCFD) and axialGapPartitioning_averageCal(FileList, newName): The two functions are pretty similar to "subChannelPartitioning" and "axialSubChPartitioning". Instead of partitioning out the sub-channels, they work on the interfaces between adjacent sub-channels. We call these interfaces "gaps". The velocity data through these gaps are of great interest for the purpose of my research.
 
-Till now, the major part of the data processing is accomplished. This lays a fundation for the succeeding work: [development of an iterative learning algorithm!](https://github.com/XiaorongLi/Momentum_Source_Iteration)
+Till now, the major part of the data processing is accomplished. This lays a fundation for the succeeding work: [development of an iterative learning algorithm.](https://github.com/XiaorongLi/Momentum_Source_Iteration)
