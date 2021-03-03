@@ -181,13 +181,6 @@ def subChannelPartitioning(fileName, nSubChPerEdge, xN, yN):
                                       sep = ',')
                 else:
                     continue
-                    #tableFrameOld = pd.read_csv(fileOutput, header = 0,
-                    #                            delimiter = ',')
-                    #tableFrameNew = pd.concat([tableFrameOld,
-                    #                           tableData.iloc[vecTmp,:]])
-                    #tableFrameNew.to_csv(fileOutput, index = False, header = True,
-                    #                     sep = ',')
-    
                 #Remove elements to avoid duplication
                 cellXT = np.delete(cellXTmp, vecTmp)
                 cellYT = np.delete(cellYTmp, vecTmp)
@@ -246,7 +239,6 @@ def gapPartitioning(combinedCFD):
     
     nogaps = len(gappos)
     gaps = []
-#    idVolAve = np.zeros((nCell, 2)) - 1
     for idZ in range(0, nogaps):
         key = 'gap' + str((idZ + 1))
         if not isinstance(gappos[key][0], tuple):
@@ -260,7 +252,6 @@ def gapPartitioning(combinedCFD):
 
 
         gaps.append(aZ)
-#        idVolAve[aZ, 1] = idZ
         fileOutput = 'cfdData_gap' + str(idZ+1) + '.csv'
     
         if osPath.isfile(fileOutput) == False:
@@ -495,7 +486,7 @@ def calEachCrossflow():
     crossFlow = pd.read_csv('Data_crossflow.csv', index_col = 'Unnamed: 0')
     peakCross = crossFlow['Node2']
     crossFlowPeakFactor = peakCross/0.8
-    #original_factor = peakCross/0.8
+
     #need to judge the sign of lateral flow according to CTF rule!!
     gapsToFlip = [2,4,6,7,9,11,13,14,16,18,20,21] #gaps in y direction
     gapsToFlipIndex = [x - 1 for x in gapsToFlip]
@@ -681,7 +672,6 @@ def CrossFactorToCTFFileAllAxial(lateralFactorsAllAxial):
     return 0
 
 ###############################################################################
-###############################################################################
 
 
 nSubCh = 16
@@ -701,7 +691,7 @@ concatFiles('velocity_xmodified.csv', 'velocity_ymodified.csv')
 fileNameCFDgap = 'CFDmodifiedGap.csv'
 gapPartitioning(fileNameCFDgap)
 fileNameCFDsubCh = 'vandtracerslopeRegionsmodified.csv'
-#tmpRes = subChannelPartitioning(fileNameCFDsubCh, nSPE, xAS, yAS) # done on Euler
+#tmpRes = subChannelPartitioning(fileNameCFDsubCh, nSPE, xAS, yAS) # done on cluster
  
 createCTFDummyCSVFile()
 fileNameCTF = 'channel_passivescalar12DummyCSVFile.csv'
@@ -723,7 +713,5 @@ SubNodedata = subExtract('cfdDataGapNodalSubdivision.npz')
 factors = calEachCrossflow()
 CrossFactorToCTFFile(factors*2.1) #2.2 resulted slightly larger lateral peaks
 
-#factors1, factors2 = calEachCrossflow2peak()
 lateralFactorsAllAxial = calEachCrossflowAllAxialNode()[1] # 1: averaged factors
-#CrossFactorToCTFFile2peak(factors1*2, factors2*4) #3 times factors2 seems too small
 CrossFactorToCTFFileAllAxial(lateralFactorsAllAxial)
