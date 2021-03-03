@@ -20,7 +20,7 @@ Both with the CFD model and the simplified model, the computational domain itsel
 
 Various Python functions have to be created for the aforementioned purpose of data processing (see the "crossvelocity.py" file in current repo). The most important packages used are numpy and pandas. In this section, I'll briefly describe a few key functions involved and show the workflow. In order to make the discussion flow smooth and concise, I'll have to skip a lot very specific technical details, which are nevertheless all included in the "crossvelocity.py". So let's take the processing of lateral velocities in two directions (x and y) as the example data. The startpoint is the raw CFD data stored in two csv files - in x and y directions, respectively.
 
-- modifyCFDfilecoordinate(filename) : This function modifies the coordinates in the raw CFD data. When exported, these data natually take the coordinates that have been determined by the inner CFD model. However in the simpified system a linearly shifted coordinate system is preferred. Therefore, this function shifts the raw data to a new coordinate system.
+- `modifyCFDfilecoordinate(filename)` : This function modifies the coordinates in the raw CFD data. When exported, these data natually take the coordinates that have been determined by the inner CFD model. However in the simpified system a linearly shifted coordinate system is preferred. Therefore, this function shifts the raw data to a new coordinate system.
 
 - concatFiles(file1, file2): In the data processing stage, I don't need to differentiate between x and y direction of the flow anymore for some reason. So I used this function to concatinate the (modified) CFD raw data together.
 
